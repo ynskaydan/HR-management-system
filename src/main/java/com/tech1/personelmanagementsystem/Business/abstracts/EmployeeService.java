@@ -16,5 +16,8 @@ public interface EmployeeService {
     DataResult<Employee> getById(int id);
     Result Add(Employee Employee);
 
+    Result Update(Employee employee);
+    Result Delete(Employee employee);
+
 
 }

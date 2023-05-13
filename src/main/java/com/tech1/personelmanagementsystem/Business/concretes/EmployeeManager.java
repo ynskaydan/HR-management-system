@@ -4,6 +4,7 @@ import com.tech1.personelmanagementsystem.Core.Utilities.Logger.abstracts.Logger
 import com.tech1.personelmanagementsystem.Core.Utilities.Results.DataResult;
 import com.tech1.personelmanagementsystem.Core.Utilities.Results.Result;
 import com.tech1.personelmanagementsystem.Core.Utilities.Results.SuccessDataResult;
+import com.tech1.personelmanagementsystem.Core.Utilities.Results.SuccessResult;
 import com.tech1.personelmanagementsystem.DataAccess.abstracts.EmployeeDao;
 import com.tech1.personelmanagementsystem.Entities.concretes.Employee;
 
@@ -25,7 +26,7 @@ public class EmployeeManager implements EmployeeService {
     @Override
     public DataResult<List<Employee>> getAll() {
         //loggerService.logToSystemInfo("All Items covered");
-        return new SuccessDataResult<List<Employee>>(this.employeeDao.findAll(),true,"All Employees Listed!");
+        return new SuccessDataResult<List<Employee>>(this.employeeDao.findAll(),"All Employees Listed!");
 
     }
 
@@ -36,7 +37,7 @@ public class EmployeeManager implements EmployeeService {
 
     @Override
     public DataResult<Employee> getById(int id) {
-        return new SuccessDataResult<Employee>(this.employeeDao.getReferenceById(id),true,"All Employees Listed!");
+        return new SuccessDataResult<Employee>(this.employeeDao.getReferenceById(id),"All Employees Listed!");
     }
 
     @Override
@@ -44,7 +45,21 @@ public class EmployeeManager implements EmployeeService {
         String message = "Employee Added: "+ employee.getEmployee_id();
         //this.loggerService.logToSystemInfo(message);
         this.employeeDao.save(employee);
-        return new Result(true);
+        return new Result(true,message);
+    }
+
+    @Override
+    public Result Update(Employee employee) {
+        String message = "Employee Updated with + " + employee.getEmployee_id();
+        employeeDao.save(employee);
+        return new SuccessResult(message);
+    }
+
+    @Override
+    public Result Delete(Employee employee) {
+        String message = "Employee Deleted: " + employee.getFirstName();
+        this.employeeDao.delete(employee);
+        return new SuccessResult(message);
     }
 
 }
