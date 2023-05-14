@@ -1,3 +1,4 @@
+/*
 package com.tech1.personelmanagementsystem.Core.Utilities.Auth;
 
 public class LoginRequest {
@@ -21,3 +22,4 @@ public class LoginRequest {
         this.password = password;
     }
 }
+*/

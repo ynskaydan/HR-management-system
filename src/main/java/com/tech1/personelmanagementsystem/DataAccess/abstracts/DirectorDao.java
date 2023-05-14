@@ -1,4 +1,10 @@
 package com.tech1.personelmanagementsystem.DataAccess.abstracts;
 
-public interface DirectorDao {
+import com.tech1.personelmanagementsystem.Entities.concretes.Director;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface DirectorDao extends JpaRepository<Director, Integer> {
+
 }

@@ -7,7 +7,8 @@ import com.tech1.personelmanagementsystem.Core.Utilities.Results.DataResult;
 import com.tech1.personelmanagementsystem.Core.Utilities.Results.Result;
 import com.tech1.personelmanagementsystem.Core.Utilities.Results.*;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.stereotype.Service;
+@Service
 public class UserManager implements UserService {
     private UserDao userDao;
 

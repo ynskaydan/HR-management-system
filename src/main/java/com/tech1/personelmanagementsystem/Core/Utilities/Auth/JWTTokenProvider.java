@@ -1,3 +1,4 @@
+/*
 package com.tech1.personelmanagementsystem.Core.Utilities.Auth;
 
 
@@ -18,3 +19,4 @@ public class JWTTokenProvider {
     private int jwtExpirationInMs;
 
 }
+*/

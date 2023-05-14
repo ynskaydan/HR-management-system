@@ -1,41 +1,41 @@
 package com.tech1.personelmanagementsystem.Core.Entities;
 
-import javax.persistence.*;
-
-
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Entity
 @Data
-@Table(name = "users")
+@Table(name="users")
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
-    private Long id;
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @Column(name="user_id")
+    private int id;
 
-    @Column(name = "username", nullable = false, unique = true)
-
-    private String username;
-
-    @Column(name = "password", nullable = false)
-    private String password;
-
-    @jakarta.persistence.ManyToOne()
-    @jakarta.persistence.JoinColumn(name="role")
-    private Role role;
-
-    @Column(name = "email", nullable = false, unique = true)
+    @Column(name="email")
     @Email
+    @NotBlank
     private String email;
 
+    @Column(name="password")
+    @NotBlank
+    private String password;
 
+    @Column(name="role")
+    private String role;
+    @Column(name = "username")
+    private String username;
 }

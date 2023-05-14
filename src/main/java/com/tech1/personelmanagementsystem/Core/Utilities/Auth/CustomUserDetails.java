@@ -1,3 +1,4 @@
+/*
 package com.tech1.personelmanagementsystem.Core.Utilities.Auth;
 
 import com.tech1.personelmanagementsystem.Core.Entities.User;
@@ -15,13 +16,19 @@ public class CustomUserDetails implements UserDetails {
         this.user = user;
     }
 
+*/
 /*    @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-*//*        // Kullanıcının rollerini döndürme işlemi
+*//*
+*/
+/*        // Kullanıcının rollerini döndürme işlemi
         return user.getRole().stream()
                 .map(role -> new SimpleGrantedAuthority(role.getName()))
                 .collect(Collectors.toList());*//*
-    }*/
+*/
+/*
+    }*//*
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -64,3 +71,4 @@ public class CustomUserDetails implements UserDetails {
     }
 
 }
+*/

@@ -23,6 +23,6 @@ public class Director {
 
     @ManyToOne()
     @JoinColumn(name="department_id")
-    private Department department_id;
+    private Department department;
 
 }

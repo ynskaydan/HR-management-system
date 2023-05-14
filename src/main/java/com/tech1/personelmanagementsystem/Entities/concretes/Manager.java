@@ -1,5 +1,6 @@
 package com.tech1.personelmanagementsystem.Entities.concretes;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,6 +12,7 @@ import java.util.List;
 @Table(name="managers")
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","employees"})
 public class Manager {
     @Id
     @Column(name="id")
@@ -24,8 +26,8 @@ public class Manager {
 
     @ManyToOne()
     @JoinColumn(name="region_id")
-    private Region region_id;
+    private Region region;
 
-    @OneToMany(mappedBy = "manager_id")
+    @OneToMany(mappedBy = "manager")
     private List<Employee> employees;
 }

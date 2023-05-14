@@ -23,25 +23,13 @@ import java.util.Date;
 public class Employee {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
-    private int employee_id;
-    @ManyToOne()
-    @JoinColumn(name="region_id")
-    private Region region_id;
-
-    @ManyToOne()
-    @JoinColumn(name="manager_id")
-    private Manager manager_id;
-    @ManyToOne()
-    @JoinColumn(name="department_id")
-    private Department department_id;
+    private int id;
     @Column(name="first_name")
     private String firstName;
-
     @Column(name="last_name")
     private String lastName;
-
     @Column(name="email_address")
     private String emailAddress;
     @Column(name="job_title")
@@ -61,6 +49,20 @@ public class Employee {
 
     @Column(name="hire_date")
     private Date hireDate;
+    @ManyToOne()
+    @JoinColumn(name="region_id")
+    private Region region;
+
+    @ManyToOne()
+    @JoinColumn(name="manager_id")
+    private Manager manager;
+    @ManyToOne()
+    @JoinColumn(name="department_id")
+    private Department department;
+
+
+
+
 
 
 

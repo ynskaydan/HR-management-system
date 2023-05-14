@@ -42,7 +42,7 @@ public class EmployeeManager implements EmployeeService {
 
     @Override
     public Result Add(Employee employee) {
-        String message = "Employee Added: "+ employee.getEmployee_id();
+        String message = "Employee Added: "+ employee.getId();
         //this.loggerService.logToSystemInfo(message);
         this.employeeDao.save(employee);
         return new Result(true,message);
@@ -50,7 +50,7 @@ public class EmployeeManager implements EmployeeService {
 
     @Override
     public Result Update(Employee employee) {
-        String message = "Employee Updated with + " + employee.getEmployee_id();
+        String message = "Employee Updated with + " + employee.getId();
         employeeDao.save(employee);
         return new SuccessResult(message);
     }

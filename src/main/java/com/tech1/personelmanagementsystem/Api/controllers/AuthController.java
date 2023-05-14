@@ -1,3 +1,4 @@
+/*
 package com.tech1.personelmanagementsystem.Api.controllers;
 
 import com.tech1.personelmanagementsystem.Core.Utilities.Auth.JWTTokenProvider;
@@ -45,3 +46,4 @@ public class AuthController {
         return null;
     }
 }
+*/

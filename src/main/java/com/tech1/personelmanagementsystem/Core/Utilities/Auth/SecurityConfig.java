@@ -1,3 +1,4 @@
+/*
 package com.tech1.personelmanagementsystem.Core.Utilities.Auth;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,3 +30,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 }
+*/
