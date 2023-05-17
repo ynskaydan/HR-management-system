@@ -19,7 +19,7 @@ public class UserManager implements UserService {
     }
 
     @Override
-    public Result add(User user) {
+    public Result Add(User user) {
         userDao.save(user);
         return new SuccessResult("User Added");
     }
@@ -27,6 +27,37 @@ public class UserManager implements UserService {
         String message = "User Deleted: " + user.getEmail();
         userDao.delete(user);
         return new SuccessResult(message);
+    }
+
+    @Override
+    public Result Update(User user) {
+        return null;
+    }
+
+
+    private boolean checkUserExist(User user) {
+        User userToFind = userDao.findByUsername(user.getUsername());
+        if (userToFind == null){
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public DataResult<User> checkUserExistByUsernamePassword(String username, String password) {
+        return null;
+    }
+
+    @Override
+    public DataResult<User> checkUserExistByUsernameEmail(String email, String password) {
+        return null;
+    }
+
+
+
+    @Override
+    public DataResult<User> findByUsername(String username) {
+        return null;
     }
 
     @Override

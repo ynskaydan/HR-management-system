@@ -1,74 +1,28 @@
-/*
 package com.tech1.personelmanagementsystem.Core.Utilities.Auth;
 
 import com.tech1.personelmanagementsystem.Core.Entities.User;
-import org.springframework.security.core.GrantedAuthority;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import java.util.Collection;
-import java.util.stream.Collectors;
+import com.tech1.personelmanagementsystem.Core.DataAccess.UserDao;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
-public class CustomUserDetails implements UserDetails {
+import java.util.Collections;
 
-    private final User user;
+@Service
+public class CustomUserDetails implements UserDetailsService {
 
-    public CustomUserDetails(User user) {
-        this.user = user;
-    }
-
-*/
-/*    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-*//*
-*/
-/*        // Kullanıcının rollerini döndürme işlemi
-        return user.getRole().stream()
-                .map(role -> new SimpleGrantedAuthority(role.getName()))
-                .collect(Collectors.toList());*//*
-*/
-/*
-    }*//*
-
+    @Autowired
+    private UserDao userDao;
 
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userDao.findByUsername(username);
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found: " + username);
+        }
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), Collections.singletonList(new SimpleGrantedAuthority(user.getRole())));
     }
-
-    @Override
-    public String getPassword() {
-        // Kullanıcının şifresini döndürme işlemi
-        return user.getPassword();
-    }
-
-    @Override
-    public String getUsername() {
-        // Kullanıcının email adresini döndürme işlemi
-        return user.getEmail();
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        // Kullanıcının hesabının süresinin dolup dolmadığını kontrol etme işlemi
-        return true; // Örnek olarak herhangi bir hesap süresi kontrolü yapmıyoruz.
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        // Kullanıcının hesabının kilitli olup olmadığını kontrol etme işlemi
-        return true; // Örnek olarak herhangi bir hesap kilitleme kontrolü yapmıyoruz.
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        // Kullanıcının kimlik bilgilerinin süresinin dolup dolmadığını kontrol etme işlemi
-        return true; // Örnek olarak herhangi bir kimlik bilgisi süresi kontrolü yapmıyoruz.
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return false;
-    }
-
 }
-*/
