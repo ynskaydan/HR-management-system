@@ -8,6 +8,10 @@ import com.tech1.personelmanagementsystem.Core.Utilities.Results.Result;
 import com.tech1.personelmanagementsystem.Core.Utilities.Results.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Objects;
+
 @Service
 public class UserManager implements UserService {
     private UserDao userDao;
@@ -23,6 +27,23 @@ public class UserManager implements UserService {
         userDao.save(user);
         return new SuccessResult("User Added");
     }
+
+    @Override
+    public DataResult<List<User>> getAll() {
+        List<User> list = userDao.findAll();
+        return new SuccessDataResult<>(list,"All users listed!");
+    }
+
+    @Override
+    public DataResult<User> getById(int id) {
+        User user = userDao.getUserById(id);
+        if(user == null){
+            return new ErrorDataResult<>("User not found");
+        }
+        return new SuccessDataResult<>(user,"User found " + user.getUsername());
+
+    }
+
     public Result Delete(User user){
         String message = "User Deleted: " + user.getEmail();
         userDao.delete(user);
@@ -31,21 +52,25 @@ public class UserManager implements UserService {
 
     @Override
     public Result Update(User user) {
-        return null;
+        String message = "User Updated: " + user.getUsername();
+        userDao.save(user);
+        return new SuccessResult(message);
     }
 
 
-    private boolean checkUserExist(User user) {
-        User userToFind = userDao.findByUsername(user.getUsername());
-        if (userToFind == null){
-            return false;
-        }
-        return true;
-    }
+
 
     @Override
     public DataResult<User> checkUserExistByUsernamePassword(String username, String password) {
-        return null;
+        User user = userDao.getUserByUsername(username);
+        if (user == null){
+            return new ErrorDataResult<>( "User not found");
+        }
+
+        if(user.getPassword().equals(password)){
+            return new SuccessDataResult<>(user,"User exist with this username,password");
+        }
+        return new ErrorDataResult<>("Not exist");
     }
 
     @Override
@@ -57,12 +82,16 @@ public class UserManager implements UserService {
 
     @Override
     public DataResult<User> findByUsername(String username) {
-        return null;
+        User user = userDao.getUserByUsername(username);
+        if (user == null){
+            return new ErrorDataResult<>("User not found!");
+        }
+        return new SuccessDataResult<>(user,"User found, " + username);
     }
 
     @Override
     public DataResult<User> findByEmail(String email) {
-        return new SuccessDataResult<User>(this.userDao.findByEmail(email)
-                ,"Kullanıcı bulundu");
+        return new SuccessDataResult<User>(this.userDao.getUserByEmail(email)
+                ,"User found");
     }
 }

@@ -1,8 +1,9 @@
 package com.tech1.personelmanagementsystem.Api.controllers;
 
 import com.tech1.personelmanagementsystem.Business.abstracts.EmployeeService;
+import com.tech1.personelmanagementsystem.Business.abstracts.UserService;
+import com.tech1.personelmanagementsystem.Core.Entities.User;
 import com.tech1.personelmanagementsystem.Core.Utilities.Results.*;
-import com.tech1.personelmanagementsystem.Entities.abstracts.EmployeeWithNames;
 import com.tech1.personelmanagementsystem.Entities.concretes.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -11,20 +12,20 @@ import javax.xml.crypto.Data;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/employees")
-public class EmployeesController {
+@RequestMapping("/api/users")
+public class UsersController {
 
-    private final EmployeeService employeeService;
+    private final UserService userService;
 
     @Autowired
-    public EmployeesController(EmployeeService employeeService){
+    public UsersController(UserService userService){
         super();
-        this.employeeService = employeeService;
+        this.userService = userService;
     }
 
     @GetMapping("/getall")
-    public DataResult<List<Employee>> getAll(){
-        DataResult<List<Employee>> result = this.employeeService.getAll();
+    public DataResult<List<User>> getAll(){
+        DataResult<List<User>> result = this.userService.getAll();
         if (result.isSuccess())
             return new SuccessDataResult<>(result.getData(),result.getMessage());
         else {
@@ -32,18 +33,18 @@ public class EmployeesController {
         }
 
     }
-    @GetMapping("/getalldtos")
-    public DataResult<List<EmployeeWithNames>> getAllEmployeesDtos(){
-        DataResult<List<EmployeeWithNames>> result = this.employeeService.getEmployeesDtos();
-        if(result.isSuccess()){
+    @GetMapping("/getbyusername")
+    public DataResult<User> getByUserName(@RequestParam("username") String username){
+        DataResult<User> result = this.userService.findByUsername(username);
+        if(result.isSuccess())
             return new SuccessDataResult<>(result.getData(),result.getMessage());
-        }
-        return new ErrorDataResult<>(result.getMessage());
+        else
+            return new ErrorDataResult<>(result.getMessage());
     }
 
     @GetMapping("/get")
-    public DataResult<Employee> getById(int id){
-        DataResult<Employee> result = this.employeeService.getById(id);
+    public DataResult<User> getById(int id){
+        DataResult<User> result = this.userService.getById(id);
         if (result.isSuccess())
             return new SuccessDataResult<>(result.getData(),result.getMessage());
         else {
@@ -53,8 +54,8 @@ public class EmployeesController {
     }
 
     @PostMapping("/add")
-    public Result Add(@RequestBody Employee employee){
-        Result result = this.employeeService.Add(employee);
+    public Result Add(@RequestBody User user){
+        Result result = this.userService.Add(user);
         if (result.isSuccess()){
             return new SuccessResult(result.getMessage());
         } else
@@ -63,8 +64,8 @@ public class EmployeesController {
     }
 
     @PutMapping("/update")
-    public Result Update(@RequestBody Employee employee) {
-        Result result = this.employeeService.Update(employee);
+    public Result Update(@RequestBody User user) {
+        Result result = this.userService.Update(user);
         if (result.isSuccess())
             return new SuccessResult(result.getMessage());
         else
@@ -72,8 +73,8 @@ public class EmployeesController {
     }
 
     @DeleteMapping("/delete")
-    public Result Delete(@RequestBody Employee employee){
-        Result result = this.employeeService.Delete(employee);
+    public Result Delete(@RequestBody User user){
+        Result result = this.userService.Delete(user);
         if (result.isSuccess())
             return new SuccessResult(result.getMessage());
         else

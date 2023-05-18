@@ -1,11 +1,9 @@
 package com.tech1.personelmanagementsystem.Business.concretes;
 import com.tech1.personelmanagementsystem.Business.abstracts.EmployeeService;
 import com.tech1.personelmanagementsystem.Core.Utilities.Logger.abstracts.LoggerService;
-import com.tech1.personelmanagementsystem.Core.Utilities.Results.DataResult;
-import com.tech1.personelmanagementsystem.Core.Utilities.Results.Result;
-import com.tech1.personelmanagementsystem.Core.Utilities.Results.SuccessDataResult;
-import com.tech1.personelmanagementsystem.Core.Utilities.Results.SuccessResult;
+import com.tech1.personelmanagementsystem.Core.Utilities.Results.*;
 import com.tech1.personelmanagementsystem.DataAccess.abstracts.EmployeeDao;
+import com.tech1.personelmanagementsystem.Entities.abstracts.EmployeeWithNames;
 import com.tech1.personelmanagementsystem.Entities.concretes.Employee;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +21,26 @@ public class EmployeeManager implements EmployeeService {
         this.employeeDao = employeeDao;
        // this.loggerService = _loggerService;
     }
+
+    @Override
+    public DataResult<List<EmployeeWithNames>> getEmployeesDtos() {
+        List<EmployeeWithNames> emp = employeeDao.getEmployeesDtos();
+        if (emp == null){
+            return new ErrorDataResult<>("Employee data is null");
+        }
+        return new SuccessDataResult<>(emp,"Employee Data found!");
+    }
+
+    @Override
+    public DataResult<EmployeeWithNames> getEmployeeDto(int id) {
+        EmployeeWithNames emp = (EmployeeWithNames) this.employeeDao.getEmployeeDto(id);
+        if(emp == null){
+            return new ErrorDataResult<>("Employee data is null");
+        }
+        else
+            return new SuccessDataResult<>(emp,"Employee Data found!");
+    }
+
     @Override
     public DataResult<List<Employee>> getAll() {
         //loggerService.logToSystemInfo("All Items covered");
@@ -34,6 +52,8 @@ public class EmployeeManager implements EmployeeService {
     public DataResult<List<Employee>> getAllSorted() {
         return null;
     }
+
+
 
     @Override
     public DataResult<Employee> getById(int id) {
