@@ -41,6 +41,7 @@ public class AuthManager implements AuthenticationService {
         userDao.save(user);
         var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder()
+                .success("true")
                 .token(jwtToken)
                 .build();
     }
@@ -54,6 +55,7 @@ public class AuthManager implements AuthenticationService {
 
         var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder()
+                .success("true")
                 .token(jwtToken)
                 .build();
     }
