@@ -1,6 +1,7 @@
 
 package com.tech1.personelmanagementsystem.Core.Utilities.Auth;
 
+import com.tech1.personelmanagementsystem.Core.Entities.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

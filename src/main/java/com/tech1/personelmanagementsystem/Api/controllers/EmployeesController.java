@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/employees")
+@CrossOrigin(origins = "http://localhost:5173")
 public class EmployeesController {
 
     private final EmployeeService employeeService;
@@ -42,14 +43,13 @@ public class EmployeesController {
     }
 
     @GetMapping("/get")
-    public DataResult<Employee> getById(int id){
+    public DataResult<Employee> getById(@RequestParam("id") int id){
         DataResult<Employee> result = this.employeeService.getById(id);
         if (result.isSuccess())
             return new SuccessDataResult<>(result.getData(),result.getMessage());
         else {
             return new ErrorDataResult<>(result.getMessage());
         }
-
     }
 
     @PostMapping("/add")
