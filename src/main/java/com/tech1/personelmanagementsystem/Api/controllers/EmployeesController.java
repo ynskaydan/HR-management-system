@@ -45,8 +45,8 @@ public class EmployeesController {
     @GetMapping("/get")
     public DataResult<Employee> getById(@RequestParam("id") int id){
         DataResult<Employee> result = this.employeeService.getById(id);
-        if (result.isSuccess())
-            return new SuccessDataResult<>(result.getData(),result.getMessage());
+        if (result.isSuccess()) {
+            return new SuccessDataResult<>(result.getData(),result.getMessage());}
         else {
             return new ErrorDataResult<>(result.getMessage());
         }

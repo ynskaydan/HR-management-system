@@ -16,7 +16,7 @@ import java.util.List;
 public class Manager {
     @Id
     @Column(name="id")
-    private int manager_id;
+    private int id;
 
     @Column(name="first_name")
     private String firstName;

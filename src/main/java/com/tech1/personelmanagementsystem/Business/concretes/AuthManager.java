@@ -42,6 +42,8 @@ public class AuthManager implements AuthenticationService {
         var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder()
                 .success("true")
+                .id(user.getId())
+                .role(user.getRole().toString())
                 .token(jwtToken)
                 .build();
     }
@@ -56,6 +58,8 @@ public class AuthManager implements AuthenticationService {
         var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder()
                 .success("true")
+                .id(user.getId())
+                .role(user.getRole().toString())
                 .token(jwtToken)
                 .build();
     }

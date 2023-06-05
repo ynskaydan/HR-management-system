@@ -5,4 +5,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ManagerDao extends JpaRepository<Manager, Integer> {
+    Manager getManagersById(int id);
 }

@@ -33,12 +33,12 @@ public class ManagerManager implements ManagerService {
 
     @Override
     public DataResult<Manager> getById(int id) {
-        return new SuccessDataResult<Manager>(this.managerDao.getReferenceById(id),"All Employees Listed!");
+        return new SuccessDataResult<Manager>(this.managerDao.getManagersById(id),"All Employees Listed!");
     }
 
     @Override
     public Result Add(Manager manager) {
-        String message = "Manager Added: "+ manager.getManager_id();
+        String message = "Manager Added: "+ manager.getFirstName();
         //this.loggerService.logToSystemInfo(message);
         this.managerDao.save(manager);
         return new Result(true,message);

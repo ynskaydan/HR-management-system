@@ -26,6 +26,8 @@ public interface EmployeeDao extends JpaRepository<Employee,Integer>{
     )
     List<EmployeeWithNames> getEmployeeDto(int id);
 
+    Employee getEmployeesById(int id);
+
     /*
     Employee getByEmployeeId(int id);
 
