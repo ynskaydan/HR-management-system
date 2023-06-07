@@ -16,6 +16,7 @@ public interface EmployeeService {
     DataResult<EmployeeWithNames> getEmployeeDto(int id);
     DataResult<List<Employee>> getAll();
     DataResult<List<Employee>> getAllSorted();
+    DataResult<List<Employee>> getCoWorkers(int id);
     DataResult<Employee> getById(int id);
     Result Add(Employee Employee);
 

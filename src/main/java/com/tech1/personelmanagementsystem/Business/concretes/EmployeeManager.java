@@ -31,6 +31,8 @@ public class EmployeeManager implements EmployeeService {
         return new SuccessDataResult<>(emp,"Employee Data found!");
     }
 
+
+
     @Override
     public DataResult<EmployeeWithNames> getEmployeeDto(int id) {
         EmployeeWithNames emp = (EmployeeWithNames) this.employeeDao.getEmployeeDto(id);
@@ -53,6 +55,19 @@ public class EmployeeManager implements EmployeeService {
         return null;
     }
 
+    @Override
+    public DataResult<List<Employee>> getCoWorkers(int id) {
+        DataResult<Employee> employee = getById(id);
+        DataResult<List<Employee>> result = getByDepartmentId(employee.getData().getDepartment().getId());
+        return new SuccessDataResult<>(result.getData(), "All co-workers listed");
+
+    }
+
+    public DataResult<List<Employee>> getByDepartmentId(int depId){
+        List<Employee> employees = this.employeeDao.getEmployeesByDepartment_Id(depId);
+        return new SuccessDataResult<>(employees);
+
+    }
 
 
     @Override

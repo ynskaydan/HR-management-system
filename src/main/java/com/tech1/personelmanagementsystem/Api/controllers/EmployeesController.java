@@ -52,6 +52,17 @@ public class EmployeesController {
         }
     }
 
+    @GetMapping("/getcoworkers")
+    public DataResult<List<Employee>> getCoWorkers(@RequestParam("id") int id){
+        DataResult<List<Employee>> result =  this.employeeService.getCoWorkers(id);
+        if (result.isSuccess()){
+            return new SuccessDataResult<>(result.getData(),result.getMessage());
+        }
+         else {
+             return new ErrorDataResult<>(result.getMessage());
+        }
+    }
+
     @PostMapping("/add")
     public Result Add(@RequestBody Employee employee){
         Result result = this.employeeService.Add(employee);
